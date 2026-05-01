@@ -59,5 +59,15 @@ python scripts/train_fft_blockwise.py --use-pca
 python scripts/train_fft_blockwise.py --use-gradcam
 ```
 
+## Pre-trained Models
+
+Due to file size limits on GitHub, the trained model weights, logs, and preprocessors are hosted on Google Drive.
+
+**[Download Artifacts (Models & Scalers)](https://drive.google.com/file/d/1I8MtEAc3MueIh9Lk6x1VHOid5eQI0M5K/view?usp=drive_link)**
+
+To use these:
+1. Download the `artifacts` file from the link above.
+2. Ensure the contents are placed in the `artifacts/` directory in the root of this project.
+
 ## Logs & Artifacts
 All trained models and logs are automatically saved to the `artifacts/` folder. Training metrics (accuracy, loss) will print to standard output (suitable for `nohup` or `tmux` sessions) and save as CSVs in `artifacts/logs/`.
