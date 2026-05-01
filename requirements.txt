@@ -1,0 +1,20 @@
+torch --index-url https://download.pytorch.org/whl/cu124
+torchvision --index-url https://download.pytorch.org/whl/cu124
+torchaudio --index-url https://download.pytorch.org/whl/cu124
+opencv-python
+scikit-image
+albumentations
+facenet-pytorch
+grad-cam
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+xgboost
+shap
+lime
+scikit-fuzzy
+tqdm
+joblib
+pyyaml

@@ -1,0 +1,51 @@
+# Paths
+data_dir: "./data/raw"
+dataset_dir: "./data/preprocessed"
+artifact_dir: "./artifacts"
+vggface_dataset_dir: "./data/vggface_clean"
+
+# Dataset Parameters
+img_size: 96
+block_size: 16
+train_ratio: 0.7
+val_ratio: 0.15
+gaussian_ksize: 3
+
+# Training Parameters
+epochs: 80
+learning_rate: 0.0003
+resnet_lr: 0.0001
+fft_global_lr: 0.001
+fft_global_weight_decay: 0.00001
+fft_blockwise_weight_decay: 0.0001
+label_smoothing: 0.05
+batch_size: 512
+num_workers: 8
+patience: 15
+early_stopping_rounds: 75
+
+# PCA Components
+pca_components: 512
+
+# Grad-CAM specific
+cam_target_mode: "predicted"
+min_attention: 0.25
+attention_strength: 1.75
+
+# XGBoost Parameters
+xgb:
+  objective: "multi:softprob"
+  tree_method: "hist"
+  max_depth: 8
+  n_estimators: 1200
+  learning_rate: 0.03
+  subsample: 0.9
+  colsample_bytree: 0.9
+  min_child_weight: 2
+  gamma: 0.05
+  reg_alpha: 0.05
+  reg_lambda: 2.0
+  eval_metric: ["mlogloss", "merror"]
+
+# Reproducibility
+seed: 42
