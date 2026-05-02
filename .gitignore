@@ -147,4 +147,5 @@ reports/
 # artifacts/ (Logs are tracked, models and preprocessors now allowed)
 !artifacts/models/
 !artifacts/preprocessors/
+!artifacts/preprocessors/*.pkl
 !training_output.log
