@@ -1,0 +1,72 @@
+\chapter{Implementation}
+\label{ch:implementation}
+
+\section{Introduction}
+
+This chapter outlines the technical realization of the Hybrid Spatial-Frequency Image Classification framework. The system is built using Python 3.8 and the PyTorch deep learning ecosystem, supplemented by the XGBoost library for high-performance gradient boosting. The implementation is designed to be modular and scalable, supporting remote execution on high-performance GPU environments such as NVIDIA V100 clusters.
+
+The codebase is organized into four core functional blocks:
+\begin{enumerate}
+    \item \textbf{Data Processing Engine:} Handles raw binary extraction, image enhancement, and normalization.
+    \item \textbf{Spectral Engineering Engine:} Implements the 2D-FFT algorithms and PCA dimensionality reduction.
+    \item \textbf{Model Library:} Contains the implementations of ResNet18, custom FFTNets, and XGBoost classifiers.
+    \item \textbf{Training and Evaluation Suite:} Manages the optimization loops, hyperparameter configurations, and explainability visualizations.
+\end{enumerate}
+
+\section{Dataset Pipeline and Preprocessing Implementation}
+
+The implementation focuses on the STL-10 and VGGFace datasets. Due to the high resolution and varied quality of these images, a robust preprocessing pipeline was implemented in the `src/data/` module.
+
+\subsection{Raw Data Extraction}
+For the STL-10 dataset, the system includes a specialized utility to extract raw binaries and reconstruct them into viewable RGB images. This ensures that the data is processed in its most original form before any augmentations are applied.
+
+\subsection{Differentiable Image Enhancement}
+To improve the signal-to-noise ratio for both the spatial and spectral branches, the following steps are implemented using OpenCV and scikit-image:
+\begin{itemize}
+    \item \textbf{Adaptive Histogram Equalization (CLAHE):} Used to normalize lighting across the dataset without introducing over-saturation artifacts.
+    \item \textbf{Gaussian Denoising:} A low-pass filter is applied to remove granular noise that could create "ghost" frequencies in the FFT spectrum.
+\end{itemize}
+
+\section{Model Architecture and Implementation}
+
+The core logic of the hybrid framework is implemented across several modular Python scripts in the `scripts/` and `src/models/` directories.
+
+\subsection{Spatial Branch: ResNet18}
+The spatial branch utilizes a pre-trained ResNet18 backbone from the `torchvision` library. The final fully connected layer is modified to match the number of classes in our target datasets (10 for STL-10). This branch is optimized using Cross-Entropy loss.
+
+\subsection{Spectral Branch: FFT-XGBoost}
+The spectral branch is implemented in two parts. First, the `FFTProcessor` class extracts 2D-FFT components from localized 8x8 blocks. These are then flattened and reduced using the `sklearn.decomposition.PCA` module. The resulting feature vectors are fed into an XGBoost classifier, which is configured for multi-class classification using the `gbtree` booster.
+
+\section{Training Procedure and Infrastructure}
+
+The training process is optimized for a server-side environment, utilizing YAML-based configurations for reproducibility.
+
+\subsection{Optimization Strategy}
+For the neural network components, we use the **Adam optimizer** with a learning rate of $1 \times 10^{-4}$ and a weight decay of $1 \times 10^{-5}$ to prevent overfitting. The XGBoost component is trained using the `hist` tree method for faster execution on large datasets.
+
+\subsection{Server-Ready Execution}
+The pipeline is designed for remote execution via SSH. We implement a `run_server.sh` script that automates the environment setup, data preparation, and training phases. This allows the system to run in the background on high-performance V100 GPU nodes without requiring constant user interaction.
+
+\section{System Flowchart}
+
+The technical implementation and data flow are visualized in Figure \ref{fig:implementation_flow}. The diagram shows the progression from raw data extraction to final fused classification.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{implementation_flowchart_diagram.png}
+    \caption{Detailed Implementation Flowchart of the Hybrid Classification Pipeline.}
+    \label{fig:implementation_flow}
+\end{figure}
+
+\section{Evaluation Metrics and Explainability}
+
+The final stage of the implementation involves a comprehensive evaluation suite.
+
+\subsection{Accuracy and Metrics}
+The system calculates Top-1 and Top-5 accuracy in real-time during training. All results, including loss curves and confusion matrices, are automatically exported as CSVs and JSON files to the `artifacts/` directory for post-training analysis.
+
+\subsection{Grad-CAM Implementation}
+To implement Grad-CAM, we utilize the `pytorch-grad-cam` library. We hook into the final convolutional layer of the ResNet branch and the fusion layer to generate heatmaps. This allows us to visually verify that the model is making decisions based on the actual object features rather than spectral noise.
+
+\section{Summary}
+The implementation of the Hybrid Spatial-Frequency Classification system provides a modular and robust solution for complex computer vision tasks. By combining the strengths of PyTorch and XGBoost with analytical FFT feature extraction, the system offers a scalable framework that is both high-performing and explainable.

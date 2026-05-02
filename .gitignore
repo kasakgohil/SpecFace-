@@ -142,9 +142,10 @@ data/
 *.pkl
 
 # Project specific
-report/
+# report/ (Uncommented to allow tracking)
 reports/
-artifacts/
+artifacts/models/
+artifacts/preprocessors/
 *.pth
 *.json
-training_output.log
+!training_output.log

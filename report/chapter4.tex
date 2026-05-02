@@ -1,0 +1,83 @@
+\chapter{Design and Methodology}
+\label{ch:methodology}
+
+\section{System Overview}
+
+The core of this project is a hybrid classification framework designed to overcome the limitations of standard, pixel-only deep learning models. By combining the high-level semantic understanding of Convolutional Neural Networks (CNNs) with the precise structural analysis of the Fast Fourier Transform (FFT), the system achieves a more robust and "multi-dimensional" understanding of visual data. 
+
+The methodology is divided into three primary phases: a comprehensive preprocessing pipeline, a dual-branch feature extraction stage (spatial and spectral), and a fused classification engine that utilizes both deep learning and classical machine learning (XGBoost). This design ensures that the model is sensitive to both the visible shapes in an image and the underlying frequency patterns that define its texture and structure.
+
+\section{Preprocessing and Image Enhancement}
+
+Before any features are extracted, the raw input images from the STL-10 and VGGFace datasets undergo a standardized preprocessing pipeline to ensure consistency and improve signal quality.
+
+\begin{itemize}
+    \item \textbf{Histogram Equalization:} This technique is used to improve the contrast of the images, ensuring that the model isn't misled by varying lighting conditions.
+    \item \textbf{Gaussian Blur:} A subtle blurring effect is applied to remove high-frequency noise that doesn't contribute to the object's identity, preventing the spectral filters from latching onto random pixel artifacts.
+    \item \textbf{Normalization:} All images are scaled to a consistent resolution (e.g., 224x224 or 256x256) and their pixel values are normalized to a standard range.
+\end{itemize}
+
+\section{Spectral Feature Engineering: The FFT Module}
+
+The defining characteristic of this methodology is the explicit extraction of frequency features. Unlike standard CNNs that try to learn these patterns implicitly, we calculate them directly using the Fast Fourier Transform.
+
+\subsection{Global and Blockwise FFT Extraction}
+The system calculates the 2D-FFT in two ways to capture both macro and micro structural details:
+\begin{enumerate}
+    \item \textbf{Global FFT:} The Fourier transform is applied to the entire image to capture the overall frequency distribution (e.g., the general orientation and texture of the scene).
+    \item \textbf{Blockwise FFT:} The image is divided into a grid of smaller blocks (e.g., 8x8 or 16x16), and the FFT is calculated for each block. This allows the model to understand how frequency patterns vary across different parts of the object, which is crucial for identifying localized features like facial components.
+\end{enumerate}
+
+\subsection{Dimensionality Reduction via PCA}
+Because raw FFT outputs are highly dimensional, they can overwhelm a standard classifier. We apply Principal Component Analysis (PCA) to these spectral features to extract the most significant components (eigenvectors). This reduces noise and ensures that only the most discriminative frequency signals are passed to the classification engine.
+
+\section{Hybrid Neural Architecture}
+
+The system utilizes a dual-branch architecture to process the spatial and spectral data in parallel before fusing them for the final decision.
+
+\subsection{The Spatial Branch (ResNet18)}
+The spatial branch uses a standard ResNet18 architecture \cite{resnet}. This branch is responsible for extracting high-level semantic features—like the shape of a nose in VGGFace or the silhouette of a bird in STL-10—using deep convolutional layers.
+
+\subsection{The Spectral Branch (FFT-XGBoost)}
+The spectral branch takes the PCA-reduced FFT features and processes them using a robust gradient-boosting model (XGBoost) or a custom "FFTNet" neural network. This branch focuses on the "substance" of the image, identifying textures and structural regularities that the spatial branch might miss.
+
+\section{System Pipeline and Flowchart}
+
+The overall flow of the system is illustrated in the diagram below. It shows how the raw input is split into two distinct analytical paths before being reunited in the fusion layer.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{classification_pipeline_diagram.png}
+    \caption{The Hybrid Spatial-Spectral Classification Pipeline.}
+    \label{fig:pipeline}
+\end{figure}
+
+\section{Explainability via Grad-CAM}
+
+To ensure the model is making decisions for the right reasons, we integrate Grad-CAM \cite{gradcam}. This allows us to generate heatmaps that show which regions of the image were most influential in the classification. In our hybrid model, this is particularly valuable because it allows us to verify if the model is focusing on the semantically meaningful parts of the frequency spectrum.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{fft_spectrum_comparison.png}
+    \caption{Visual comparison: Original image, its FFT spectrum, and the resulting Grad-CAM heatmap.}
+    \label{fig:gradcam_visual}
+\end{figure}
+
+\section{Performance Metrics}
+
+The system is evaluated using a variety of metrics to ensure a comprehensive understanding of its performance:
+
+\begin{table}[h!]
+\centering
+\caption{System Performance and Evaluation Metrics}
+\label{tab:metrics}
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Category} & \textbf{Metric} & \textbf{Description} \\ \hline
+Accuracy & Top-1 Accuracy & The percentage of images correctly classified. \\ \cline{2-3} 
+ & Top-5 Accuracy & The percentage of images where the correct class is in the top 5 predictions. \\ \hline
+Loss & Cross-Entropy & Used to optimize the weights of the neural network branches. \\ \hline
+Fidelity & SSIM / PSNR & Used during preprocessing to ensure Histogram Equalization doesn't destroy image integrity. \\ \hline
+Explainability & Visual Faithfulness & Evaluated qualitatively via Grad-CAM heatmap alignment with the object. \\ \hline
+\end{tabular}
+\end{table}

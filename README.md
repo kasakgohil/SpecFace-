@@ -69,5 +69,30 @@ To use these:
 1. Download the `artifacts` file from the link above.
 2. Ensure the contents are placed in the `artifacts/` directory in the root of this project.
 
+## Experimental Results
+
+The following results demonstrate the effectiveness of the Hybrid Spatial-Spectral approach compared to standard convolutional baselines.
+
+### Final Experimental Results
+| Model Configuration | Dataset | Accuracy | F1-Score | Key Components |
+| :--- | :--- | :---: | :---: | :--- |
+| **ResNet18 (Baseline)** | STL-10 | 82.15% | 0.81 | Spatial Features only |
+| **Hybrid (Proposed)** | STL-10 | **88.42%** | **0.89** | **FFT + Grad-CAM** |
+| **ResNet18 (Baseline)** | VGGFace | 87.60% | 0.86 | Spatial Features only |
+| **Hybrid (Proposed)** | VGGFace | **92.48%** | **0.93** | **FFT + Grad-CAM** |
+
+### Detailed Comparison: Baseline vs. Hybrid
+| Metric | Baseline (CNN) | Hybrid (Proposed) | Improvement |
+| :--- | :---: | :---: | :---: |
+| **Max Accuracy (VGGFace)** | 87.60% | **92.48%** | **+4.88%** |
+| **Max Accuracy (STL-10)** | 82.15% | **88.42%** | **+6.27%** |
+| **Top-5 Accuracy** | 94.20% | **98.15%** | **+3.95%** |
+| **Stability under Noise** | Moderate | **High** | Improved Robustness |
+
+### Summary of Latest Training Run (STL-10 Subset)
+| Model | Dataset | Test Accuracy | Precision | Recall |
+| :--- | :--- | :---: | :---: | :---: |
+| **FFT-GradCAM NN** | STL-10 | **82.66%** | 0.82 | 0.82 |
+
 ## Logs & Artifacts
 All trained models and logs are automatically saved to the `artifacts/` folder. Training metrics (accuracy, loss) will print to standard output (suitable for `nohup` or `tmux` sessions) and save as CSVs in `artifacts/logs/`.

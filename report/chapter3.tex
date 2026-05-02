@@ -1,0 +1,37 @@
+\chapter{Literature Survey}
+
+\section{The Evolution of Image Classification: From Handcrafted Features to CNNs}
+
+Image classification has long been a foundational challenge in computer vision. Before the deep learning revolution, researchers relied heavily on "handcrafted" features to describe the contents of an image. Techniques like Scale-Invariant Feature Transform (SIFT) and Histogram of Oriented Gradients (HOG) were the gold standard. These methods focused on identifying specific edges, corners, and textures in the spatial domain to build a mathematical representation of an object.
+
+While these methods were groundbreaking, they were also limited by their rigidity. They required experts to manually decide which features were important, which often failed when faced with the messy, unpredictable nature of real-world imagery. The shift toward Convolutional Neural Networks (CNNs) fundamentally changed this by allowing models to learn features automatically. However, as we have discussed, this success came with a trade-off: a heavy reliance on spatial pixel data and a relative neglect of the frequency-domain information that could make these models even more robust.
+
+\section{The Dominance of Spatial Deep Learning Architectures}
+
+With the introduction of architectures like VGG, ResNet \cite{resnet}, and Inception, deep learning took over the field. These models achieved unprecedented accuracy by stacking dozens or even hundreds of layers to extract high-level semantic information from raw pixels. The "residual" connections in ResNet, for example, allowed for much deeper networks by solving the vanishing gradient problem, making it a standard baseline for projects like this one.
+
+Despite their power, these architectures are primarily "spatial-centric." They excel at identifying shapes and arrangements but often treat textures as mere pixel noise. This leads to a known vulnerability: CNNs can be easily fooled by small spatial perturbations or changes in texture that don't actually change the object's identity. This project looks to address this by re-introducing classical signal processing ideas into these modern architectures.
+
+\section{Frequency Domain Analysis and the Rise of Spectral Learning}
+
+The idea of analyzing images in the frequency domain is not new. Signal processing has used the Fourier Transform \cite{fft} and Discrete Cosine Transform (DCT) for decades, most notably in image compression like JPEG. In these contexts, frequency analysis is used to separate essential structural information from high-frequency noise that the human eye can't see.
+
+Recently, there has been a renewed interest in "spectral learning"—the idea of incorporating these frequency-domain insights directly into neural networks. Researchers have begun exploring how models can "learn" in the frequency domain, with some studies showing that frequency-aware models can be much more lightweight and resistant to noise than their spatial-only counterparts \cite{freq_learning}. This project builds on this growing body of work by specifically testing how hybrid features can improve performance on challenging datasets.
+
+\section{Interpretable AI and the Role of Saliency Maps}
+
+As models have grown more complex, the need to understand them has become urgent. The field of Explainable AI (XAI) has emerged to pull back the curtain on these "black box" systems. One of the most significant advancements in this area has been the development of saliency maps, with Grad-CAM \cite{gradcam} being one of the most widely used techniques.
+
+Grad-CAM allows researchers to see exactly which parts of an image a model is "looking at" when it makes a classification. By calculating the gradients of the target class with respect to the final convolutional layer, Grad-CAM produces a heatmap that highlights the most important regions. In our project, this is essential for verifying that our hybrid model is actually utilizing the frequency features we’ve provided, rather than relying on random background artifacts.
+
+\section{Benchmarking on Real-World Data: STL-10 and VGGFace}
+
+To truly test a classification system, it must be evaluated on data that reflects real-world complexity. The STL-10 dataset was specifically designed for developing unsupervised and semi-supervised learning algorithms, featuring natural images with significant variations in scale and lighting. Similarly, the VGGFace dataset \cite{vggface} provides a massive collection of facial images, presenting a different set of challenges related to fine-grained identity markers and pose variations.
+
+Literature on these datasets shows that while CNNs perform well, they often struggle with "out-of-distribution" data—images that look different from what they saw during training. This motivates our project’s focus on using frequency features as a way to provide a more "universal" understanding of image structure that is less dependent on specific pixel arrangements.
+
+\section{Summary of the Research Gap}
+
+A review of the current literature reveals a clear gap: we have powerful spatial models (CNNs) and precise spectral tools (FFT), but they are rarely combined into a unified, explainable framework for general image classification. Most research either focuses on improving CNN architectures or using frequency analysis for compression and noise removal.
+
+This project aims to fill this gap by proposing a hybrid framework. By merging handcrafted spectral features with deep spatial representations and using Grad-CAM for verification, we aim to prove that a multi-dimensional approach is not just more accurate, but also more robust and trustworthy than the standard "black box" models used today.
