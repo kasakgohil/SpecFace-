@@ -142,7 +142,7 @@ data/
 *.pkl
 
 # Project specific
-# report/ (Uncommented to allow tracking)
+report/
 reports/
 artifacts/models/
 artifacts/preprocessors/
