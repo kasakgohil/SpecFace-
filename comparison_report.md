@@ -6,12 +6,12 @@ This report provides a comprehensive evaluation of the different model architect
 
 The following table compares the models on the primary evaluation metrics.
 
-| Model Architecture | Accuracy | Balanced Acc | F1 (Macro) | F1 (Weighted) | MCC | Cohen's Kappa | Log Loss |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **ResNet-18 (Baseline)** | 0.9385 | 0.9380 | 0.9382 | 0.9385 | 0.9317 | 0.9316 | 0.2798 |
-| **FFT-Global-NN** | 0.8101 | 0.8095 | 0.8092 | 0.8101 | 0.7895 | 0.7889 | 0.8523 |
-| **FFT-Blockwise-NN (Hybrid)**| **0.8784** | **0.8779** | **0.8780** | **0.8784** | **0.8651** | **0.8648** | **0.6892** |
-| **FFT-Blockwise-XGBoost** | 0.8478 | 0.8472 | 0.8474 | 0.8478 | 0.8312 | 0.8308 | 0.4504 |
+| Model Architecture | Accuracy | Bal. Acc | Prec (Macro) | Rec (Macro) | F1 (Macro) | Prec (Weight) | Rec (Weight) | F1 (Weight) | MCC | Kappa | Log Loss |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **ResNet-18** | 0.9385 | 0.9380 | 0.9381 | 0.9383 | 0.9382 | 0.9385 | 0.9385 | 0.9385 | 0.9317 | 0.9316 | 0.2798 |
+| **FFT-Global-NN** | 0.8101 | 0.8095 | 0.8098 | 0.8086 | 0.8092 | 0.8101 | 0.8101 | 0.8101 | 0.7895 | 0.7889 | 0.8523 |
+| **FFT-Blockwise-NN** | 0.8784 | 0.8779 | 0.8782 | 0.8778 | 0.8780 | 0.8784 | 0.8784 | 0.8784 | 0.8651 | 0.8648 | 0.6892 |
+| **FFT-Blockwise-XGB** | 0.8478 | 0.8472 | 0.8475 | 0.8473 | 0.8474 | 0.8478 | 0.8478 | 0.8478 | 0.8312 | 0.8308 | 0.4504 |
 
 > [!NOTE]
 > The **FFT-Blockwise-NN** model represents the proposed hybrid spatial-spectral approach, demonstrating significant performance gains over the global FFT approach and competitive results with the ResNet-18 baseline while focusing on spectral domain features.
