@@ -51,15 +51,9 @@ def main():
         print(f"Global FFT models already found. Skipping step...")
         return
 
-    train_dir = os.path.join(config.VGGFACE_DATASET_DIR, "train")
-    if not os.path.exists(train_dir):
-        print(f"Warning: Dataset not found at {train_dir}. Trying STL-10 dataset dir.")
-        train_dir = os.path.join(config.DATASET_DIR, "train")
-        val_dir = os.path.join(config.DATASET_DIR, "val")
-        test_dir = os.path.join(config.DATASET_DIR, "test")
-    else:
-        val_dir = os.path.join(config.VGGFACE_DATASET_DIR, "val")
-        test_dir = os.path.join(config.VGGFACE_DATASET_DIR, "test")
+    train_dir = os.path.join(config.DATASET_DIR, "train")
+    val_dir = os.path.join(config.DATASET_DIR, "val")
+    test_dir = os.path.join(config.DATASET_DIR, "test")
         
     class_names = sorted(os.listdir(train_dir))
     num_classes = len(class_names)

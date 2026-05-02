@@ -2,7 +2,6 @@
 data_dir: "./data/raw"
 dataset_dir: "./data/preprocessed"
 artifact_dir: "./artifacts"
-vggface_dataset_dir: "./data/vggface_clean"
 
 # Dataset Parameters
 img_size: 96

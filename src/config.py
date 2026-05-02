@@ -10,7 +10,6 @@ class Config:
         self.DATA_DIR = self.yaml_config.get("data_dir", r"C:\work\Capstone\stl\stl10_binary")
         self.DATASET_DIR = self.yaml_config.get("dataset_dir", r"C:\work\Capstone\data\preprocessed")
         self.ARTIFACT_DIR = self.yaml_config.get("artifact_dir", "artifacts")
-        self.VGGFACE_DATASET_DIR = self.yaml_config.get("vggface_dataset_dir", r"C:\work\Capstone\vggface\data_clean")
 
         # Directories
         self.PREPROCESSOR_DIR = os.path.join(self.ARTIFACT_DIR, "preprocessors")
