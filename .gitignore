@@ -13,6 +13,8 @@ env/
 .venv/
 conda_env/
 
+# dataset
+data/
 
 # Distribution / packaging
 .Python

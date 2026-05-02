@@ -21,7 +21,7 @@ ResNet model already found at ./artifacts/models/pytorch/best_resnet18.pth. Skip
 /raid/home/dgxuser75/capstone_face/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12050). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
   return torch._C._cuda_getDeviceCount() > 0
 Using device: cpu
-Warning: Dataset not found at ./data/vggface_clean/train. Trying STL-10 dataset dir.
+Warning: Dataset not found at ./data/preprocessed/train. Trying STL-10 dataset dir.
 Classes: 10
 Extracting features...
 train-1:   0%|          | 0/909 [00:00<?, ?it/s]train-1:   2%|▏         | 15/909 [00:00<00:06, 148.83it/s]train-1:   4%|▍         | 38/909 [00:00<00:04, 190.83it/s]train-1:   6%|▋         | 59/909 [00:00<00:04, 194.20it/s]train-1:   9%|▉         | 80/909 [00:00<00:04, 200.00it/s]train-1:  11%|█         | 102/909 [00:00<00:03, 204.24it/s]train-1:  14%|█▍        | 126/909 [00:00<00:03, 214.56it/s]train-1:  16%|█▋        | 149/909 [00:00<00:03, 217.70it/s]train-1:  19%|█▉        | 172/909 [00:00<00:03, 219.91it/s]train-1:  21%|██▏       | 194/909 [00:00<00:03, 212.27it/s]train-1:  24%|██▍       | 216/909 [00:01<00:03, 211.55it/s]train-1:  27%|██▋       | 241/909 [00:01<00:03, 222.26it/s]train-1:  29%|██▉       | 264/909 [00:01<00:02, 223.51it/s]train-1:  32%|███▏      | 290/909 [00:01<00:02, 233.64it/s]train-1:  35%|███▍      | 314/909 [00:01<00:02, 225.79it/s]train-1:  37%|███▋      | 337/909 [00:01<00:02, 223.38it/s]train-1:  40%|███▉      | 360/909 [00:01<00:02, 208.93it/s]train-1:  42%|████▏     | 384/909 [00:01<00:02, 214.63it/s]train-1:  45%|████▍     | 406/909 [00:01<00:02, 206.74it/s]train-1:  47%|████▋     | 431/909 [00:02<00:02, 214.21it/s]train-1:  50%|█████     | 456/909 [00:02<00:02, 224.20it/s]train-1:  53%|█████▎    | 479/909 [00:02<00:01, 223.21it/s]train-1:  55%|█████▌    | 502/909 [00:02<00:01, 211.26it/s]train-1:  58%|█████▊    | 524/909 [00:02<00:01, 207.19it/s]train-1:  60%|██████    | 546/909 [00:02<00:01, 207.48it/s]train-1:  63%|██████▎   | 571/909 [00:02<00:01, 215.42it/s]train-1:  65%|██████▌   | 593/909 [00:02<00:01, 212.14it/s]train-1:  68%|██████▊   | 618/909 [00:02<00:01, 221.33it/s]train-1:  71%|███████   | 641/909 [00:02<00:01, 221.77it/s]train-1:  73%|███████▎  | 664/909 [00:03<00:01, 218.51it/s]train-1:  75%|███████▌  | 686/909 [00:03<00:01, 204.89it/s]train-1:  78%|███████▊  | 711/909 [00:03<00:00, 216.50it/s]train-1:  81%|████████  | 734/909 [00:03<00:00, 219.52it/s]train-1:  83%|████████▎ | 757/909 [00:03<00:00, 218.13it/s]train-1:  86%|████████▌ | 781/909 [00:03<00:00, 222.20it/s]train-1:  88%|████████▊ | 804/909 [00:03<00:00, 211.28it/s]train-1:  91%|█████████ | 827/909 [00:03<00:00, 213.92it/s]train-1:  93%|█████████▎| 849/909 [00:03<00:00, 206.30it/s]train-1:  96%|█████████▌| 870/909 [00:04<00:00, 200.89it/s]train-1:  98%|█████████▊| 892/909 [00:04<00:00, 204.47it/s]train-1: 100%|██████████| 909/909 [00:04<00:00, 212.75it/s]
@@ -58,7 +58,7 @@ ResNet model already found at ./artifacts/models/pytorch/best_resnet18.pth. Skip
 /raid/home/dgxuser75/capstone_face/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12050). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
   return torch._C._cuda_getDeviceCount() > 0
 Using device: cpu
-Warning: Dataset not found at ./data/vggface_clean/train. Trying STL-10 dataset dir.
+Warning: Dataset not found at ./data/preprocessed/train. Trying STL-10 dataset dir.
 Classes: 10
 Extracting features...
   - Loading train Class 1 (909 images)...
@@ -81,7 +81,7 @@ ResNet model already found at ./artifacts/models/pytorch/best_resnet18.pth. Skip
 /raid/home/dgxuser75/capstone_face/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12050). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
   return torch._C._cuda_getDeviceCount() > 0
 Using device: cpu
-Warning: Dataset not found at ./data/vggface_clean/train. Trying STL-10 dataset dir.
+Warning: Dataset not found at ./data/preprocessed/train. Trying STL-10 dataset dir.
 Classes: 10
 Extracting features...
   - Loading train Class 1 (909 images)...
@@ -98,7 +98,7 @@ Preprocessed data already found in ./data/preprocessed. Skipping data setup...
 Using device: cuda
 ResNet model already found at ./artifacts/models/pytorch/best_resnet18.pth. Skipping training and moving to next step...
 Using device: cuda
-Warning: Dataset not found at ./data/vggface_clean/train. Trying STL-10 dataset dir.
+Warning: Dataset not found at ./data/preprocessed/train. Trying STL-10 dataset dir.
 Classes: 10
 Extracting features...
   - Loading train Class 1 (909 images)...
@@ -3043,7 +3043,7 @@ EarlyStopping counter: 1 out of 15
 Using device: cuda
 ResNet model already found at ./artifacts/models/pytorch/best_resnet18.pth. Skipping training and moving to next step...
 Using device: cuda
-Warning: Dataset not found at ./data/vggface_clean/train. Trying STL-10 dataset dir.
+Warning: Dataset not found at ./data/preprocessed/train. Trying STL-10 dataset dir.
 Classes: 10
 Extracting features...
   - Loading train Class 1 (909 images)...
