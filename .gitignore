@@ -144,8 +144,7 @@ data/
 # Project specific
 report/
 reports/
-artifacts/models/
-artifacts/preprocessors/
-*.pth
-*.json
+# artifacts/ (Logs are tracked, models and preprocessors now allowed)
+!artifacts/models/
+!artifacts/preprocessors/
 !training_output.log
